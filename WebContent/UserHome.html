@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Halifa Bobo</title> 
+<meta http-equiv="X-UA-Compatible" content="no-cache"  charset="UTF-8">
+<META HTTP-EQUIV="Pragma" content="no-cache" >
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+
+
+<script>
+
+		//check to find the system
+		var HomeUrlHash = window.location.href.replace(window.location.hash,'');
+		var urlSplitHome = HomeUrlHash.split('/');
+		var oMainSplitApp;
+		if(urlSplitHome[2] == "192.168.203.194:8000"){
+			 var serviceUrlCSO = "http://192.168.203.194:8000/sap/opu/odata/sap/ZUI5_CSO_INT_SRV/";
+			 var globaluser = "hlf_batch";
+			 var globalpass = "hlf_batch";
+		 }else if(urlSplitHome[2] == "192.168.203.193:8000"){
+			 var serviceUrlCSO = "http://192.168.203.193:8000/sap/opu/odata/sap/ZUI5_CSO_INT_SRV/";
+			 var globaluser = "RANDALLANG";
+			 var globalpass = "randall@123";
+		 }else if(urlSplitHome[2] == "hlfsapdev.halifa-bobo.com:8000"){
+			 var serviceUrlCSO = "http://hlfsapdev.halifa-bobo.com:8000/sap/opu/odata/sap/ZUI5_CSO_INT_SRV/";
+			 var globaluser = "hlf_batch";
+			 var globalpass = "hlf_batch";
+		 }else{
+			 var serviceUrlCSO = "http://" + urlSplitHome[2] + "/sap/opu/odata/sap/ZUI5_CSO_INT_SRV/";
+			 var globaluser = "RANDALLANG";
+			 var globalpass = "randall@123";
+		 }
+		 
+			var isMobile = {
+				    Android: function() {
+				        return navigator.userAgent.match(/Android/i);
+				    },
+				    BlackBerry: function() {
+				        return navigator.userAgent.match(/BlackBerry/i);
+				    },
+				    iOS: function() {
+				        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+				    },
+				    Opera: function() {
+				        return navigator.userAgent.match(/Opera Mini/i);
+				    },
+				    Windows: function() {
+				        return navigator.userAgent.match(/IEMobile/i);
+				    },
+				    any: function() {
+				        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+				    }
+				};
+			
+		 </script>
+
+<script src="resources/sap-ui-core.js" id="sap-ui-bootstrap"
+	data-sap-ui-libs="sap.m,sap.ui.unified,sap.ui.table,sap.ui.ux3,sap.ca.ui,sap.ui.commons"
+	data-sap-ui-theme="sap_bluecrystal"
+	data-sap-ui-xx-bindingSyntax="complex">
+</script>
+
+
+		<link rel="stylesheet" href="css/stylesheet.css">
+		<link rel="stylesheet" href="css/standardUserHome.css">
+		<link rel="stylesheet" href="css/LoginStylesheet.css">
+	
+<!--  PT Start -->
+
+
+ <!-- Import from Excel -->
+<script src="js/xls.js"></script>
+<script src="js/utility.js"></script>
+<script src="js/createMainPage.js"></script> 
+<script src="js/dateFormatter.js"></script>
+<script>
+
+
+
+sap.ui.localResources("js");
+jQuery.sap.require("sap.m.MessageBox");
+jQuery.sap.require("sap.m.MessageToast");
+
+
+	
+	try {
+		sap.ui.getCore().loadLibrary("sap.ui.commons");
+	} catch (e) {
+		alert("This test page requires the library 'sap.ui.commons' which is not available.");
+		throw (e);
+	}
+	var busyDialog = (busyDialog) ? busyDialog : new sap.m.BusyDialog('busy',
+	{
+		text : 'Please Wait',
+		customIcon : 'images/ajax-loader.gif',
+		title : 'Loading...'
+	});
+	jQuery.sap.require("sap.ui.model.json.JSONModel");
+	
+	/* Refresh Check 
+	var objUtil = new utility();
+	var check = objUtil.checkforlogout();
+	if(check == true){
+		
+	}
+	else if(sessionStorage.login != undefined){
+        sessionStorage.removeItem('login');
+    Refresh Check*/
+    	sap.ui.localResources("zhlc_31072016");
+		var app = new sap.m.App({initialPage:"idwelcome1"});
+		var page = sap.ui.view({id:"idwelcome1", viewName:"zhlc_31072016.welcome", type:sap.ui.core.mvc.ViewType.JS});
+		app.addPage(page);
+		app.placeAt('content');
+    //}	// Refresh Check
+	
+    window.onbeforeunload = function() { return "Do you want to Exit?"; };
+    
+    $(window).on("navigate", function (event, data) {
+    	  var direction = data.state.direction;
+    	  if (direction == 'back') {
+    	    // do something
+    		alert("Do you want to Exit?");
+    	  }
+    	  if (direction == 'forward') {
+    	    // do something else
+    	  }
+    	});
+    
+</script>
+
+</head>
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
+</html>

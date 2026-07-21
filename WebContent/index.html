@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible"  content="no-cache" charset="UTF-8">
+		<title>Halifa Bobo</title> 
+		
+<script src="resources/sap-ui-core.js" type="text/javascript"
+		id="sap-ui-bootstrap"
+		data-sap-ui-libs="sap.m,sap.ui.ux3,sap.ui.commons"
+		data-sap-ui-theme="sap_bluecrystal">
+</script>
+		
+		<link rel="stylesheet" href="css/stylesheet.css">
+		<link rel="stylesheet" href="css/standard.css">
+		<link rel="stylesheet" href="css/LoginStylesheet.css">
+		 <script>
+		 var isMobile = {
+				    Android: function() {
+				        return navigator.userAgent.match(/Android/i);
+				    },
+				    BlackBerry: function() {
+				        return navigator.userAgent.match(/BlackBerry/i);
+				    },
+				    iOS: function() {
+				        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+				    },
+				    Opera: function() {
+				        return navigator.userAgent.match(/Opera Mini/i);
+				    },
+				    Windows: function() {
+				        return navigator.userAgent.match(/IEMobile/i);
+				    },
+				    any: function() {
+				        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+				    }
+				};
+		 </script>
+		<script src="js/LoginView.js"></script>
+		<script src="js/utility.js"></script>
+		<script src="js/WelcomePageView.js"></script>
+		<script src="js/vanbilling.js"></script>		
+		 <script>
+		 
+		  //check to find the system
+		 var HomeUrlHash = window.location.href.replace(window.location.hash,'');
+		 var urlSplitHome = HomeUrlHash.split('/');
+		 
+		 if(urlSplitHome[2] == "192.168.203.108:8000"){
+			 var serviceUrl = "http://192.168.203.108:8000/sap/opu/odata/sap/ZUI5_MAIN_SRV/";
+			 var globaluser = "hlf_batch";
+			 var globalpass = "hlf_batch";
+		 }else if(urlSplitHome[2] == "192.168.203.109:8000"){
+			 var serviceUrl = "http://192.168.203.109:8000/sap/opu/odata/sap/ZUI5_MAIN_SRV/";
+			 var globaluser = "hlf_batch";
+			 var globalpass = "hlf_batch";
+		 }else{
+			 var serviceUrl = "http://" + urlSplitHome[2] + "/sap/opu/odata/sap/ZUI5_MAIN_SRV/";
+			 var globaluser = "hlf_batch";
+			 var globalpass = "hlf_batch";
+		 }
+		 
+		 sap.ui.localResources("zhlc_31072016");
+			var app = new sap.m.App({initialPage:"idmainView1"});
+			var page = sap.ui.view({id:"idmainView1", viewName:"zhlc_31072016.Login", type:sap.ui.core.mvc.ViewType.JS});
+			app.addPage(page);
+			//app.setBackgroundImage("images/login/Login_bgimage.jpg");
+			app.setBackgroundOpacity(0.3);
+			app.placeAt("content");
+			
+ 	 	var busyDialog = (busyDialog) ? busyDialog : new sap.m.BusyDialog(
+					{
+						text : 'Please Wait',
+						customIcon : 'images/ajax-loader.gif',
+						title : 'Loading...'
+					});  
+  
+			
+			</script>
+			
+		</head>
+		<body class="sapUiBody1" role="application">
+			<div id="content"></div>
+		</body>
+	</html>
